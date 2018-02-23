@@ -28,18 +28,18 @@ public class ComplexNumber {
     }
 
     public double getThetaDegrees() {
-        return theta;
+        return Math.toDegrees(theta);
     }
 
     public double getThetaRadians() {
-        return Math.toRadians(theta);
+        return theta;
     }
 
     public ComplexNumber(double real, double imaginaria) {
         this.real = real;
         this.imaginaria = imaginaria;
         this.modulus = Math.sqrt(real * real + imaginaria * imaginaria);
-        this.theta = Math.toDegrees(Math.atan((imaginaria / real)));
+        this.theta = Math.atan((imaginaria / real));
     }
 
     @Override

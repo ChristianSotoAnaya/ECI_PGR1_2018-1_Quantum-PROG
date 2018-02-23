@@ -35,9 +35,50 @@ public class ComplexCalculator {
         return new ComplexNumber(a, b);
     }
 
+    /**
+     *
+     * @param ro Modulo del numero
+     * @param theta Angulo en radianes
+     * @return
+     */
+    public static ComplexNumber polarToComplex(double ro, double theta) {
+        double a = ro * Math.cos(theta);
+        double b = ro * Math.sin(theta);
+        return new ComplexNumber(a, b);
+    }
+
     public static ComplexNumber getConjugate(ComplexNumber c) {
         double a = c.getReal();
         double b = (-1) * c.getImaginaria();
         return new ComplexNumber(a, b);
+    }
+
+    /**
+     *
+     * @param c Numero complejo al cual se quiere elevar
+     * @param power Exponente entero mayor o igual a 0
+     * @return Resultado c elevado a power
+     */
+    public static ComplexNumber complexPower(ComplexNumber c, int power) {
+        double ro = Math.pow(c.getModulus(), power);
+        double theta = power * c.getThetaRadians();
+        return polarToComplex(ro, theta);
+    }
+
+    /**
+     * 
+     * @param c Numero complejo al que se le quieren hayar las raices
+     * @param root Raiz n (root)
+     * @return Raices de c. Arreglo de tamaño root por el teorema fundamental del algebra.
+     */
+    public static ComplexNumber[] complexRoot(ComplexNumber c, int root) {
+        double ro = Math.pow(c.getModulus(), 1 / root);
+        double theta = c.getThetaRadians();
+        ComplexNumber[] roots = new ComplexNumber[root];
+        for (int k = 0; k < root; ++k) {
+            double theta_root = (theta + k * 2 * Math.PI) / root;
+            roots[k] = polarToComplex(ro, theta_root);
+        }
+        return roots;
     }
 }
