@@ -209,65 +209,20 @@ public class ComplexVectorSpaces {
         return flag;
     }
    
-    public String tensorProduct(ComplexNumber[][] matrix1,ComplexNumber[][] matrix2){
+    public Stack tensorProduct(ComplexNumber[][] matrix1,ComplexNumber[][] matrix2){
         ComplexNumber[][] answerMatrix = new ComplexNumber[matrix1.length*matrix2.length][matrix1[0].length*matrix2[0].length];
         Stack answers= new Stack();
-    
         for(int i = 0; i<matrix1.length;i++){
             for(int j = 0; j<matrix1[i].length;j++){
                 ComplexNumber[][] temp = new ComplexNumber[matrix2.length][matrix2[0].length];
                 for(int k = 0; k<matrix2.length;k++){
                     for(int h = 0;h<matrix2[k].length;h++){
-                        /* System.out.println(" matrix2 : " + matrix2[k][h]);*/
-                        //System.out.println("Operacion : " + matrix1[i][j] + " * " +matrix2[k][h] + " = " + ComplexCalculator.complexMultiplication(matrix1[i][j],matrix2[k][h]));
-                        
-                        temp[k][h] = ComplexCalculator.complexMultiplication(matrix1[i][j],matrix2[k][h]);
-
-                        
-                       
+                        temp[k][h] = ComplexCalculator.complexMultiplication(matrix1[i][j],matrix2[k][h]);  
                     }
-                }
-                    answers.push(temp);
-                   
-                
+                }answers.push(temp); 
             }   
-       }
-        
-        ArrayList<ArrayList> orden = new ArrayList<>();
-        int conta = 0;
-        for(int n = 0; n < answers.size(); n++){
-            ComplexNumber[][] stack = (ComplexNumber[][]) answers.get(n);
-            
-            orden.add(this.imprimir(stack, matrix2.length,conta));
-            
-            conta++;   
-       }
-        
-       
-        
-        /*for(int n = 0; n < answerMatrix.length; n++) {
-            for(int m = 0; m < answerMatrix.length; m++){
-                System.out.print(answerMatrix[n][m]);
-            }
-            System.out.println("\n");
-        }*/
-        
-        return "HI";
-    }
-    
-    private ArrayList imprimir(ComplexNumber[][] stack,int jump, int start){
-        ArrayList<ComplexNumber> lista = new ArrayList<>();
-        System.out.println("start : " +start);
-        for(int vv = 0; vv < stack.length; vv ++) {
-            for(int m = 0; m < stack[vv].length; m++){
-                System.out.print(stack[vv][m]);
-                lista.add(stack[vv][m]);
-            }
-            System.out.println("\n");
         }
-        return lista;
-        
-        
+        return answers;
     }
-    
+       
 }
