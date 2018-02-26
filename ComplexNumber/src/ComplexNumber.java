@@ -34,10 +34,24 @@ public class ComplexNumber {
     public double getThetaRadians() {
         return theta;
     }
-
+    
+    @Override
+    public boolean equals (Object numbers){
+        ComplexNumber number = (ComplexNumber) numbers; boolean flag = false;
+        if(this.getReal() == number.getReal() && this.getImaginaria() == number.getImaginaria()){ flag = true;}
+        return flag;   
+    }
+    
     public ComplexNumber(double real, double imaginaria) {
         this.real = real;
         this.imaginaria = imaginaria;
+        this.modulus = Math.sqrt(real * real + imaginaria * imaginaria);
+        this.theta = Math.atan((imaginaria / real));
+    }
+    
+    public ComplexNumber(double real) {
+        this.real = real;
+        this.imaginaria = 0;
         this.modulus = Math.sqrt(real * real + imaginaria * imaginaria);
         this.theta = Math.atan((imaginaria / real));
     }

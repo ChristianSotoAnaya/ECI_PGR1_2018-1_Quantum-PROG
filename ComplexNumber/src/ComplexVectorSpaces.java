@@ -195,6 +195,33 @@ public class ComplexVectorSpaces {
         return ans;
     }
     
+    public boolean isHermitian(ComplexNumber[][] hermitian){
+        boolean flag = false;
+        if(hermitian.length == hermitian[0].length){
+            for(int i = 0; i<hermitian.length;i++){
+                if(hermitian[i][i].getImaginaria()==0){
+                    for(int j = 0; j<hermitian[i].length;j++){if(j!=i){if(ComplexCalculator.getConjugate(hermitian[i][j]).equals(hermitian[j][i])){flag = true;
+                        }else{flag = false;break;}}}}
+            }
+        }
+        return flag;
+    }
     
+    public ComplexNumber[][] tensorProduct(ComplexNumber[][] matrix1,ComplexNumber[][] matrix2){
+        ComplexNumber[][] answerMatrix = new ComplexNumber[matrix1.length*matrix2.length][matrix1[0].length*matrix2[0].length];
+        for(int i = 0; i<matrix1.length;i++){
+         
+            for(int j = 0; j<matrix1[i].length;j++){
+                System.out.println("matrix1 : " + matrix1[i][j]);
+                for(int k = 0; k<matrix2.length;k++){
+                    System.out.println("k : " + k);
+                    for(int h = 0; h<matrix2[k].length;h++){
+                        System.out.println("h : " + h );
+                    }
+                }
+            }
+        }
+        return answerMatrix;
+    }
     
 }
