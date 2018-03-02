@@ -217,21 +217,6 @@ public class ComplexVectorSpaces {
             
             }
         }
-        
-        
-        /*
-        Stack answers= new Stack();
-        for(int i = 0; i<matrix1.length;i++){
-            for(int j = 0; j<matrix1[i].length;j++){
-                ComplexNumber[][] temp = new ComplexNumber[matrix2.length][matrix2[0].length];
-                for(int k = 0; k<matrix2.length;k++){
-                    for(int h = 0;h<matrix2[k].length;h++){
-                        temp[k][h] = ComplexCalculator.complexMultiplication(matrix1[i][j],matrix2[k][h]);  
-                    }
-                }answers.push(temp); 
-            }   
-        }
-        */
         return answerMatrix;
     }
        
