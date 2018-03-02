@@ -209,8 +209,17 @@ public class ComplexVectorSpaces {
         return flag;
     }
    
-    public Stack tensorProduct(ComplexNumber[][] matrix1,ComplexNumber[][] matrix2){
+    public ComplexNumber[][] tensorProduct(ComplexNumber[][] matrix1,ComplexNumber[][] matrix2){
         ComplexNumber[][] answerMatrix = new ComplexNumber[matrix1.length*matrix2.length][matrix1[0].length*matrix2[0].length];
+        for(int i = 0; i<answerMatrix.length;i++){
+            for(int j = 0; j<answerMatrix[0].length;j++){
+                answerMatrix[i][j]=ComplexCalculator.complexMultiplication(matrix1[i/matrix2.length][j/matrix2[0].length], matrix2[i%matrix2.length][j%matrix2[0].length]);
+            
+            }
+        }
+        
+        
+        /*
         Stack answers= new Stack();
         for(int i = 0; i<matrix1.length;i++){
             for(int j = 0; j<matrix1[i].length;j++){
@@ -222,7 +231,8 @@ public class ComplexVectorSpaces {
                 }answers.push(temp); 
             }   
         }
-        return answers;
+        */
+        return answerMatrix;
     }
        
 }

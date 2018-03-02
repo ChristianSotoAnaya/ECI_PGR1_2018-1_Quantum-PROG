@@ -36,7 +36,20 @@ public class Main {
         
         
         System.out.println(y.isHermitian(x));
-        y.tensorProduct(x, z);
+        ComplexNumber[][] asd = y.tensorProduct(x, z);
+        
+        for(int i = 0; i<asd.length;i++){
+            for(int j = 0; j<asd[i].length;j++){
+                
+                System.out.print(asd[i][j]);
+            }
+        System.out.println("\n");
+        }
+                
+                
+
+
+        
     }
     
 }
