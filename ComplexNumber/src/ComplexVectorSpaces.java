@@ -16,7 +16,7 @@ import java.util.List;
 public class ComplexVectorSpaces {
 
     //Drill 2.1.1
-    public ComplexNumber[] complexVectorSum(ComplexNumber[] vect1, ComplexNumber[] vect2) {
+    public static ComplexNumber[] complexVectorSum(ComplexNumber[] vect1, ComplexNumber[] vect2) {
         if (vect1.length==vect2.length){
         
             ComplexNumber[] ans = new ComplexNumber[vect1.length];
@@ -30,7 +30,7 @@ public class ComplexVectorSpaces {
         }
     }
 
-    public ComplexNumber[] complexVectorInverse(ComplexNumber[] vect) {
+    public static ComplexNumber[] complexVectorInverse(ComplexNumber[] vect) {
         ComplexNumber[] ans = new ComplexNumber[vect.length];
         for (int i=0;i<vect.length;i++){
             ComplexNumber num = new ComplexNumber(vect[i].getReal()*-1,vect[i].getImaginaria()*-1);
@@ -39,7 +39,7 @@ public class ComplexVectorSpaces {
         return ans;
     }
 
-    public ComplexNumber[] complexVectorScalarMultiplication(ComplexNumber[] vect, ComplexNumber c) {
+    public static ComplexNumber[] complexVectorScalarMultiplication(ComplexNumber[] vect, ComplexNumber c) {
         ComplexNumber[] ans = new ComplexNumber[vect.length];
         for (int i=0;i<vect.length;i++){
             ComplexNumber num = ComplexCalculator.complexMultiplication(vect[i], c);
@@ -55,7 +55,7 @@ public class ComplexVectorSpaces {
     
     
     //Drill 2.2.1 pag 39
-    public ComplexNumber[][] complexMatrixSum(ComplexNumber[][] matrix1, ComplexNumber[][] matrix2) {
+    public static ComplexNumber[][] complexMatrixSum(ComplexNumber[][] matrix1, ComplexNumber[][] matrix2) {
         if (matrix1.length==matrix2.length && matrix1[0].length==matrix2[0].length){
             ComplexNumber[][] ans = new ComplexNumber[matrix1.length][matrix1[0].length];
             for (int i = 0; i < matrix1.length; i++) {
@@ -70,8 +70,25 @@ public class ComplexVectorSpaces {
             throw new RuntimeException("INFO: Error, Las matrices no tienen la misma dimension");
         }
     }
+    
+    public static ComplexNumber[][] complexMatrixSubstraction(ComplexNumber[][] matrix1, ComplexNumber[][] matrix2) {
+        if (matrix1.length==matrix2.length && matrix1[0].length==matrix2[0].length){
+            ComplexNumber[][] ans = new ComplexNumber[matrix1.length][matrix1[0].length];
+            for (int i = 0; i < matrix1.length; i++) {
+                for (int j = 0; j < matrix1[i].length;j++){
+                    ans[i][j]=ComplexCalculator.complexSubtraction(matrix1[i][j], matrix2[i][j]);
+                }
+            }
+            return ans;
 
-    public ComplexNumber[][] complexMatrixInverse(ComplexNumber[][] matrix) {
+        }else{
+            Logger.logMsg(Logger.ERROR, "INFO: Error, Las matrices no tienen la misma dimension");
+            throw new RuntimeException("INFO: Error, Las matrices no tienen la misma dimension");
+        }
+    }
+    
+
+    public static ComplexNumber[][] complexMatrixInverse(ComplexNumber[][] matrix) {
         ComplexNumber[][] ans = new ComplexNumber[matrix.length][matrix.length];
         for (int i=0;i<matrix.length;i++){
             for (int j = 0; j < matrix[i].length;j++){
@@ -82,7 +99,7 @@ public class ComplexVectorSpaces {
         return ans;
     }
 
-    public ComplexNumber[][] complexMatrixScalarMultiplication(ComplexNumber[][] matrix, ComplexNumber c) {
+    public static ComplexNumber[][] complexMatrixScalarMultiplication(ComplexNumber[][] matrix, ComplexNumber c) {
         ComplexNumber[][] ans = new ComplexNumber[matrix.length][matrix.length];
         for (int i=0;i<matrix.length;i++){
             for (int j = 0; j < matrix[i].length;j++){
@@ -99,7 +116,7 @@ public class ComplexVectorSpaces {
     
     
     //Drill 2.2.2 pag 42
-    public ComplexNumber[][] complexMatrixMultiplication(ComplexNumber[][] matrix1, ComplexNumber[][] matrix2) {
+    public static ComplexNumber[][] complexMatrixMultiplication(ComplexNumber[][] matrix1, ComplexNumber[][] matrix2) {
         if(matrix1[0].length==matrix2.length){
             ComplexNumber[][] ans = new ComplexNumber[matrix1.length][matrix2[0].length];
             for (int i=0;i<ans.length;i++){
@@ -127,7 +144,7 @@ public class ComplexVectorSpaces {
     
     
     //Drill 2.2.3 pag 42
-    public ComplexNumber[] complexMatrixVectorMultiplication(ComplexNumber[][] matrix, ComplexNumber[] vect) {
+    public static ComplexNumber[] complexMatrixVectorMultiplication(ComplexNumber[][] matrix, ComplexNumber[] vect) {
         if(matrix[0].length==vect.length){
             ComplexNumber[] ans = new ComplexNumber[vect.length];
             for (int i=0;i<ans.length;i++){
@@ -149,7 +166,7 @@ public class ComplexVectorSpaces {
     
     
     //Drill 2.4.1 pag 55
-    public ComplexNumber complexVectorInnerProduct(ComplexNumber[] vect1,ComplexNumber[] vect2){
+    public static ComplexNumber complexVectorInnerProduct(ComplexNumber[] vect1,ComplexNumber[] vect2){
         if (vect1.length==vect2.length){
             ComplexNumber ans = new ComplexNumber(0, 0);
             for (int i = 0; i<vect1.length;i++){
@@ -168,21 +185,19 @@ public class ComplexVectorSpaces {
     
     
     //Drill 2.4.2 pag 57
-    public ComplexNumber complexVectorNorm(ComplexNumber[] vect1){
+    public static ComplexNumber[] complexVectorNorm(ComplexNumber[] vect1){
         ComplexNumber ans = new ComplexNumber(0, 0);
         for (int i = 0; i<vect1.length;i++){
             ans=ComplexCalculator.complexSum(ans, ComplexCalculator.complexMultiplication(vect1[i],vect1[i]));
         }
-        //NOTA: no esta implementada la funcion de raiz Cuadrada para numeros Complejos
-        //return Math.sqrt(ans);
-        return ans;
+        return ComplexCalculator.complexRoot(ans, 2);
     }
     
     
     
     
     //Drill 2.4.3 pag 57
-    public ComplexNumber complexVectorDistance(ComplexNumber[] vect1,ComplexNumber[] vect2){
+    public static ComplexNumber[] complexVectorDistance(ComplexNumber[] vect1,ComplexNumber[] vect2){
         ComplexNumber ans = new ComplexNumber(0, 0);
         ComplexNumber[] diff = new ComplexNumber[vect1.length];
         for (int x = 0; x<vect1.length;x++){
@@ -192,12 +207,10 @@ public class ComplexVectorSpaces {
         for (int i = 0; i<vect1.length;i++){
             ans=ComplexCalculator.complexSum(ans, ComplexCalculator.complexMultiplication(diff[i],diff[i]));
         }
-        //NOTA: no esta implementada la funcion de raiz Cuadrada para numeros Complejos
-        //return Math.sqrt(ans);
-        return ans;
+        return ComplexCalculator.complexRoot(ans, 2);
     }
     
-    public boolean isHermitian(ComplexNumber[][] hermitian){
+    public static boolean isHermitian(ComplexNumber[][] hermitian){
         boolean flag = false;
         if(hermitian.length == hermitian[0].length){
             for(int i = 0; i<hermitian.length;i++){
@@ -209,15 +222,53 @@ public class ComplexVectorSpaces {
         return flag;
     }
    
-    public ComplexNumber[][] tensorProduct(ComplexNumber[][] matrix1,ComplexNumber[][] matrix2){
+    public static ComplexNumber[][] tensorProduct(ComplexNumber[][] matrix1,ComplexNumber[][] matrix2){
         ComplexNumber[][] answerMatrix = new ComplexNumber[matrix1.length*matrix2.length][matrix1[0].length*matrix2[0].length];
         for(int i = 0; i<answerMatrix.length;i++){
             for(int j = 0; j<answerMatrix[0].length;j++){
                 answerMatrix[i][j]=ComplexCalculator.complexMultiplication(matrix1[i/matrix2.length][j/matrix2[0].length], matrix2[i%matrix2.length][j%matrix2[0].length]);
-            
             }
         }
         return answerMatrix;
     }
        
+    public static ComplexNumber[] observableMeanAndVariance(ComplexNumber[][] matrix, ComplexNumber[] ket){
+        if (isHermitian(matrix)){
+            // calculate the mnea value
+            ComplexNumber[] bra = complexMatrixVectorMultiplication(matrix, ket);
+            for (int l=0;l<bra.length;l++){
+                bra[l]=ComplexCalculator.getConjugate(bra[l]);
+            }
+            ComplexNumber Mean = complexVectorInnerProduct(bra, ket);
+            
+            // calculate the variance
+            ComplexNumber[][] identity = new ComplexNumber[matrix.length][matrix.length];
+            for (int k=0;k<matrix.length;k++){
+                for (int j=0;j<matrix.length;j++){
+                    if (k==j){
+                        identity[k][j]= Mean;
+                    }else{
+                        identity[k][j]= new ComplexNumber(0);
+                    }
+                }
+            }
+            ComplexNumber[][] hermitianOperator = complexMatrixSubstraction(matrix, identity);
+            ComplexNumber[][] powHermitianOperator =  complexMatrixMultiplication(hermitianOperator, hermitianOperator);
+            ComplexNumber[] y = complexMatrixVectorMultiplication(powHermitianOperator, ket);
+            for (int g=0;g<ket.length;g++){
+                ket[g]=ComplexCalculator.getConjugate(ket[g]);
+            }
+            ComplexNumber variance = complexVectorInnerProduct(ket,y);
+            ComplexNumber[] ans = new ComplexNumber[2];
+            ans[0]=Mean;
+            ans[1]=variance;
+            return ans;
+            
+        }else{
+            Logger.logMsg(Logger.ERROR, "INFO: Error, La matriz no es hermitiana");
+            throw new RuntimeException("INFO: Error, La matriz no es hermitiana");
+        }
+
+        
+    }
 }

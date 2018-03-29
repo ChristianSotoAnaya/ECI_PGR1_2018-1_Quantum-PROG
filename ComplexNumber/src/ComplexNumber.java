@@ -58,6 +58,6 @@ public class ComplexNumber {
 
     @Override
     public String toString() {
-        return "(" + real + " " + (imaginaria < 0 ? "-" : "+") + " " + imaginaria + "i)";
+        return "(" + real + " " + (imaginaria < 0 ? "-" : "+") + " " + (imaginaria < 0 ? imaginaria*-1 : imaginaria) + "i)";
     }
 }
