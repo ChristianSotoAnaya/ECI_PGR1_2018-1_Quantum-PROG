@@ -184,7 +184,7 @@ public class ComplexVectorSpaces {
     
     public static boolean isHermitian(ComplexNumber[][] hermitian){
         boolean flag = false;
-        if(hermitian.length == hermitian[0].length){
+        if(isSquare(hermitian)){
             for(int i = 0; i<hermitian.length;i++){
                 if(hermitian[i][i].getImaginaria()==0){
                     for(int j = 0; j<hermitian[i].length;j++){if(j!=i){if(ComplexCalculator.getConjugate(hermitian[i][j]).equals(hermitian[j][i])){flag = true;
@@ -204,8 +204,7 @@ public class ComplexVectorSpaces {
         return answerMatrix;
     }
 
-    private static ComplexNumber[][] cofactorMatrix(int position,ComplexNumber[][] matrix){
-        
+    private static ComplexNumber[][] cofactorMatrix(int position,ComplexNumber[][] matrix){      
         ComplexNumber[][] newMatrix = new ComplexNumber[matrix.length-1][matrix.length-1];
         int counter1 = 0; int counter2 ;
         for(int i = 0; i < matrix.length; i++){
@@ -225,7 +224,7 @@ public class ComplexVectorSpaces {
 
     public static ComplexNumber matrixDeterminant(ComplexNumber[][] matrix){
         ComplexNumber determinant = null;
-        if(matrix.length == matrix[0].length){
+        if(isSquare(matrix)){
             if( matrix.length == 2 ){
                 determinant = ComplexCalculator.complexSubtraction(ComplexCalculator.complexMultiplication(matrix[0][0],matrix[1][1]),ComplexCalculator.complexMultiplication(matrix[0][1],matrix[1][0]));
                 return determinant;
@@ -238,9 +237,86 @@ public class ComplexVectorSpaces {
                 }
             }
         }
+        else{
+            System.out.println("La matrix no es cuadrada");
+        }
         return determinant;
     }
+    
+    public static ComplexNumber[][] adjointMatrix(ComplexNumber[][] matrix){ 
+        ComplexNumber[][] adjoint = null;
+        if(isSquare(matrix)){
+            adjoint = new ComplexNumber[matrix.length][matrix.length];
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[i].length; j++) {
+                    adjoint[j][i] = ComplexCalculator.getConjugate(matrix[i][j]);
+               }
+            }
 
+         }
+        else{
+            System.out.println("La matrix no es cuadrada");;
+        }
+        return adjoint;
+    }
+    
+    public static boolean isSquare(ComplexNumber[][] matrix){
+        boolean square = false;
+        if(matrix.length == matrix[0].length){
+            square = true;
+        }
+        return square;
+    }
+    public static ComplexNumber[][] matrixMultiplication(ComplexNumber[][] matrix1,ComplexNumber[][] matrix2){
+        ComplexNumber[][] newMatrix = null;
+        if(matrix1[0].length == matrix2.length){
+            newMatrix = new ComplexNumber[matrix1.length][matrix2.length];
+            for (int i = 0; i < matrix1.length; i++) {
+                for (int j = 0; j < matrix2[i].length; j++) {
+                    for(int k = 0; k < matrix2.length; k++){
+                        newMatrix[i][j] = ComplexCalculator.complexSum(newMatrix[i][j],ComplexCalculator.complexMultiplication(matrix1[i][k], matrix2[k][j]));
+                    }
+                }
+            }
+        }
+        else{
+            System.out.println("No es posible multiplicar estas matrices");
+        }
+        return newMatrix;
+    }
+    
+    public static boolean isIdentityMatrix(ComplexNumber[][] matrix){
+        boolean identity = false;
+        if(isSquare(matrix)){        
+            int diagonal = 0;int notDiagonal =  0;
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix.length; j++) {
+                     if(i == j){
+                         diagonal += i+j;
+                     }
+                     else{
+                         notDiagonal = i+j;
+                     }
+                }
+            }
+            if(diagonal == matrix.length && notDiagonal == 0){
+                identity = true;
+            }
+        }
+        return identity;
+    }
+    
+    public static boolean isUnitary(ComplexNumber[][] matrix){
+        boolean unitary = false;
+        if(isSquare(matrix)){
+            ComplexNumber[][] matrixByAdjoint = matrixMultiplication(matrix, adjointMatrix(matrix));
+            if (isIdentityMatrix(matrixByAdjoint)){
+                unitary = true;
+            }
+        }
+        return unitary;
+    }
+    
     public static ComplexNumber[] observableMeanAndVariance(ComplexNumber[][] matrix, ComplexNumber[] ket){
         if (isHermitian(matrix)){
             // calculate the mnea value
