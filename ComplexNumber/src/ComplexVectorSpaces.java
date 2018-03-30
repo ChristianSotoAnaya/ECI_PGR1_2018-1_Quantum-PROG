@@ -48,12 +48,6 @@ public class ComplexVectorSpaces {
         return ans;
     }
     
-
-    
-    
-    
-    
-    
     //Drill 2.2.1 pag 39
     public static ComplexNumber[][] complexMatrixSum(ComplexNumber[][] matrix1, ComplexNumber[][] matrix2) {
         if (matrix1.length==matrix2.length && matrix1[0].length==matrix2[0].length){
@@ -87,7 +81,6 @@ public class ComplexVectorSpaces {
         }
     }
     
-
     public static ComplexNumber[][] complexMatrixInverse(ComplexNumber[][] matrix) {
         ComplexNumber[][] ans = new ComplexNumber[matrix.length][matrix.length];
         for (int i=0;i<matrix.length;i++){
@@ -109,11 +102,6 @@ public class ComplexVectorSpaces {
         }
         return ans;
     }
-    
-    
-    
-    
-    
     
     //Drill 2.2.2 pag 42
     public static ComplexNumber[][] complexMatrixMultiplication(ComplexNumber[][] matrix1, ComplexNumber[][] matrix2) {
@@ -137,12 +125,6 @@ public class ComplexVectorSpaces {
         }      
     }
     
-    
-    
-    
-    
-    
-    
     //Drill 2.2.3 pag 42
     public static ComplexNumber[] complexMatrixVectorMultiplication(ComplexNumber[][] matrix, ComplexNumber[] vect) {
         if(matrix[0].length==vect.length){
@@ -152,8 +134,7 @@ public class ComplexVectorSpaces {
                 for (int k = 0; k < matrix[0].length;k++){
                     num=ComplexCalculator.complexSum(num, ComplexCalculator.complexMultiplication(matrix[i][k], vect[k]));
                 }
-                ans[i]=num;
-                
+                ans[i]=num;        
             }
             return ans;
         }
@@ -163,7 +144,6 @@ public class ComplexVectorSpaces {
             
         }      
     }
-    
     
     //Drill 2.4.1 pag 55
     public static ComplexNumber complexVectorInnerProduct(ComplexNumber[] vect1,ComplexNumber[] vect2){
@@ -178,12 +158,7 @@ public class ComplexVectorSpaces {
             throw new RuntimeException("INFO: Error, Los vectores no tienen la misma dimension");
         }
     }
-    
-    
-    
-    
-    
-    
+ 
     //Drill 2.4.2 pag 57
     public static ComplexNumber[] complexVectorNorm(ComplexNumber[] vect1){
         ComplexNumber ans = new ComplexNumber(0, 0);
@@ -192,10 +167,7 @@ public class ComplexVectorSpaces {
         }
         return ComplexCalculator.complexRoot(ans, 2);
     }
-    
-    
-    
-    
+
     //Drill 2.4.3 pag 57
     public static ComplexNumber[] complexVectorDistance(ComplexNumber[] vect1,ComplexNumber[] vect2){
         ComplexNumber ans = new ComplexNumber(0, 0);
@@ -231,7 +203,44 @@ public class ComplexVectorSpaces {
         }
         return answerMatrix;
     }
-       
+
+    private static ComplexNumber[][] cofactorMatrix(int position,ComplexNumber[][] matrix){
+        
+        ComplexNumber[][] newMatrix = new ComplexNumber[matrix.length-1][matrix.length-1];
+        int counter1 = 0; int counter2 ;
+        for(int i = 0; i < matrix.length; i++){
+            if(i != 0){
+                counter2 = 0;
+                for(int j = 0; j < matrix.length; j++){
+                    if(j != position && j < matrix.length){                      
+                        newMatrix[counter1][counter2] = matrix[i][j];
+                        counter2++;
+                    }
+                }
+                counter1++;
+            }
+        }
+        return newMatrix;
+    }
+
+    public static ComplexNumber matrixDeterminant(ComplexNumber[][] matrix){
+        ComplexNumber determinant = null;
+        if(matrix.length == matrix[0].length){
+            if( matrix.length == 2 ){
+                determinant = ComplexCalculator.complexSubtraction(ComplexCalculator.complexMultiplication(matrix[0][0],matrix[1][1]),ComplexCalculator.complexMultiplication(matrix[0][1],matrix[1][0]));
+                return determinant;
+            }
+            else{
+                determinant = new ComplexNumber(0);
+                for(int i = 0; i < matrix.length; i++){
+                    ComplexNumber[][] cofactor = cofactorMatrix(i,matrix);
+                    determinant = ComplexCalculator.complexSum(determinant,ComplexCalculator.complexMultiplication(ComplexCalculator.complexMultiplication(new ComplexNumber(Math.pow(-1,i)),matrix[0][i]),matrixDeterminant(cofactor)));
+                }
+            }
+        }
+        return determinant;
+    }
+
     public static ComplexNumber[] observableMeanAndVariance(ComplexNumber[][] matrix, ComplexNumber[] ket){
         if (isHermitian(matrix)){
             // calculate the mnea value
