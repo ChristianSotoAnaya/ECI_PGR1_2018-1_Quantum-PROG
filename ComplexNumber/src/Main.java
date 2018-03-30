@@ -18,12 +18,18 @@ public class Main {
         ComplexVectorSpaces y = new ComplexVectorSpaces();
         ComplexNumber[][] x = new ComplexNumber[2][2];
         ComplexNumber[][] z = new ComplexNumber[4][4];
-        x[0][0]= new ComplexNumber(3);
-        x[0][1]= new ComplexNumber(4);
-        x[1][0]= new ComplexNumber(1);
-        x[1][1]= new ComplexNumber(2);
-        //System.out.println(y.matrixDeterminant(x));
-        
+        x[0][0]= new ComplexNumber(3,2);
+        x[0][1]= new ComplexNumber(4,4);
+        x[1][0]= new ComplexNumber(1,5);
+        x[1][1]= new ComplexNumber(2,6);
+        ComplexNumber[][] c = y.adjointMatrix(x);
+        for(int i = 0; i<c.length;i++){
+            for(int j = 0; j<c[i].length;j++){
+                
+                System.out.print(c[i][j]);
+            }
+        System.out.println("\n");;
+        }
         z[0][0]= new ComplexNumber(3);
         z[0][1]= new ComplexNumber(-2);
         z[0][2]= new ComplexNumber(1);
@@ -41,7 +47,7 @@ public class Main {
         z[3][2]= new ComplexNumber(-2);
         z[3][3]= new ComplexNumber(6);
         
-        System.out.println(y.matrixDeterminant(z));
+        //System.out.println(y.matrixDeterminant(z));
         //System.out.println(y.isHermitian(x));
         //ComplexNumber[][] asd = y.tensorProduct(x, z);
         /*
