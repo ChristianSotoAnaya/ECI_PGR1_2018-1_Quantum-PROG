@@ -160,13 +160,16 @@ public class ComplexVectorSpaces {
     }
  
     //Drill 2.4.2 pag 57
-    public static ComplexNumber[] complexVectorNorm(ComplexNumber[] vect1){
-        ComplexNumber ans = new ComplexNumber(0, 0);
+    public static double complexVectorNorm(ComplexNumber[] vect1){
+        double ans = 0;
         for (int i = 0; i<vect1.length;i++){
-            ans=ComplexCalculator.complexSum(ans, ComplexCalculator.complexMultiplication(vect1[i],vect1[i]));
+            double a = vect1[i].getReal();
+            double b = vect1[i].getImaginaria();
+            ans+=a*a + b*b;
         }
-        return ComplexCalculator.complexRoot(ans, 2);
+        return Math.sqrt(ans);
     }
+    
 
     //Drill 2.4.3 pag 57
     public static ComplexNumber[] complexVectorDistance(ComplexNumber[] vect1,ComplexNumber[] vect2){
@@ -203,6 +206,19 @@ public class ComplexVectorSpaces {
         }
         return answerMatrix;
     }
+    
+    
+    public static ComplexNumber[] ComplexVectorTensorProduct(ComplexNumber[] vector1,ComplexNumber[] vector2){
+        ComplexNumber[] answerVector = new ComplexNumber[vector1.length*vector2.length];
+        for(int i = 0; i<answerVector.length;i++){
+            answerVector[i]=ComplexCalculator.complexMultiplication(  vector1[i/vector2.length] ,   vector2[i%vector2.length]);
+        }
+        return answerVector;
+    }
+    
+            
+            
+            
 
     private static ComplexNumber[][] cofactorMatrix(int position,ComplexNumber[][] matrix){      
         ComplexNumber[][] newMatrix = new ComplexNumber[matrix.length-1][matrix.length-1];
