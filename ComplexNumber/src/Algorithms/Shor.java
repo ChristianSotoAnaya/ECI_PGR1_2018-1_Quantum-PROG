@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Algorithms;
+
+import Quantum.ComplexNumber;
+import Quantum.ComplexVectorSpaces;
+import java.util.Arrays;
 
 /**
  *
- * @author xbran
+ * @author USER
  */
-
-import java.lang.Math;
-import java.util.Arrays;
-public class Main {
-
-    /**
-     * @param args the command line arguments
-     */
+public class Shor {
     public static void main(String[] args) {
         // TODO code application logic here
         ComplexNumber[] a= new ComplexNumber[3];
@@ -209,6 +207,4 @@ public class Main {
         
         
     }
-    
-    
 }
