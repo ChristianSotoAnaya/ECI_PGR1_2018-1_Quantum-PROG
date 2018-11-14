@@ -68,6 +68,18 @@ public class ComplexCalculator {
     }
 
     /**
+     *
+     * @param c Numero complejo al cual se quiere elevar
+     * @param power Exponente complejo
+     * @return Resultado c elevado a power
+     */
+    public static ComplexNumber complexPowerComplex(ComplexNumber c, ComplexNumber power) {
+        double ro = Math.pow(c.getModulus(), power.getModulus());
+        double theta = power.getThetaRadians() * c.getThetaRadians();
+        return polarToComplex(ro, theta);
+    }
+
+    /**
      * 
      * @param c Numero complejo al que se le quieren hayar las raices
      * @param root Raiz n (root)
