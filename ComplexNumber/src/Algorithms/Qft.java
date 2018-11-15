@@ -8,6 +8,7 @@ package Algorithms;
 import Quantum.ComplexNumber;
 import Quantum.ComplexVectorSpaces;
 import Quantum.ComplexCalculator;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,10 +24,15 @@ public class Qft {
     }
 
     //Realizar la QFT sobre los estados entrantes
-    public ComplexNumber[][] transform(ComplexNumber[] states){
-        ComplexNumber[][] Hadamart = this.hadamardMatrix();
-        
-        return Hadamart;
+    public ComplexNumber[] transform(ComplexNumber[] states){
+        ComplexNumber[][] hadamart = this.hadamardMatrix();
+        int qubits = states.length;
+        ComplexNumber[] finalStates = new ComplexNumber[qubits];
+        ArrayList<ComplexNumber[][]> fases = new ArrayList<ComplexNumber[][]>();
+        for(int i=0; i<qubits; i++){
+            fases.add(faseChange(i));
+        }
+        return finalStates;
     }
     
     //Crea una matriz de Hadamard
