@@ -15,7 +15,6 @@ import java.util.Arrays;
  */
 public class Shor {
     public static void main(String[] args) {
-        // TODO code application logic here
         ComplexNumber[] a= new ComplexNumber[3];
         ComplexNumber[] b= new ComplexNumber[3];
         a[0]= new ComplexNumber(1,2);
@@ -114,9 +113,6 @@ public class Shor {
             }
         }
         
-//        for (Integer[] asd:UF){
-//            System.out.println(Arrays.toString(asd));
-//        }
         return UF;
     }
     
