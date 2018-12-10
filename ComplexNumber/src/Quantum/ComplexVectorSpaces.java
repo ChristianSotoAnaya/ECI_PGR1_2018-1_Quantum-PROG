@@ -147,6 +147,26 @@ public class ComplexVectorSpaces {
         }      
     }
     
+    //Shor
+    public static ComplexNumber[] complexVectorMatrixMultiplication(ComplexNumber[] vect, ComplexNumber[][] matrix) {
+        if(vect.length==matrix.length){
+            ComplexNumber[] ans = new ComplexNumber[vect.length];
+            for (int i=0;i<ans.length;i++){
+                ComplexNumber num = new ComplexNumber(0,0);
+                for (int k = 0; k < vect.length;k++){
+                    num=ComplexCalculator.complexSum(num, ComplexCalculator.complexMultiplication(matrix[k][i], vect[k]));
+                }
+                ans[i]=num;        
+            }
+            return ans;
+        }
+        else{
+            Logger.logMsg(Logger.ERROR, "INFO: Error, Las columnas de la matriz no son iguales ");
+            throw new RuntimeException("INFO: Error, Las columnas de la matriz no son iguales ");
+            
+        }  
+    }
+    
     //Drill 2.4.1 pag 55
     public static ComplexNumber complexVectorInnerProduct(ComplexNumber[] vect1,ComplexNumber[] vect2){
         if (vect1.length==vect2.length){
@@ -218,9 +238,7 @@ public class ComplexVectorSpaces {
         return answerVector;
     }
     
-            
-            
-            
+     
 
     private static ComplexNumber[][] cofactorMatrix(int position,ComplexNumber[][] matrix){      
         ComplexNumber[][] newMatrix = new ComplexNumber[matrix.length-1][matrix.length-1];
@@ -374,4 +392,5 @@ public class ComplexVectorSpaces {
 
         
     }
+
 }

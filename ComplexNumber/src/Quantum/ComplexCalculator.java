@@ -66,6 +66,8 @@ public class ComplexCalculator {
         double theta = power * c.getThetaRadians();
         return polarToComplex(ro, theta);
     }
+    
+    
 
     /**
      *
