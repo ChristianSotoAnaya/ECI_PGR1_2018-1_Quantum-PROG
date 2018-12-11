@@ -45,7 +45,9 @@ public class Qft {
         ArrayList component;
         ComplexNumber[][] hadamart = hadamardMatrix();
         ComplexNumber[][] identity = identityMatrix();
-        int qubits = states.length/2; //Es el numero de qubits (2 numeros representan 1 qubit)
+        int qubits;
+        Double lenght = Math.log(states.length)/Math.log(2);
+        qubits = lenght.intValue();//Es el numero de qubits (2 numeros representan 1 qubit)
         ComplexNumber[] finalStates = new ComplexNumber[qubits];
         ArrayList<ComplexNumber[][]> fases = new ArrayList<ComplexNumber[][]>();
         if(qubits <=1){
