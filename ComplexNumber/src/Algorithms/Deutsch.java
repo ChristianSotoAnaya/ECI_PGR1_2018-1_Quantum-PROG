@@ -29,7 +29,7 @@ public class Deutsch {
         botQubit=createBotQubit();
         hadamard = createHadamard();
         identidad = createIdentidad();
-        uf=uf(0); // [0: 0->1 ; 1->0] | [1: 0->0 ; 1->1]       |        [2: 0->1 ; 1->1] | [3: 0->0 ; 1->0] 
+        uf=uf(3); // [0: 0->1 ; 1->0] | [1: 0->0 ; 1->1]       |        [2: 0->1 ; 1->1] | [3: 0->0 ; 1->0] 
         
         // productos tensores
         tensorQubit = ComplexVectorSpaces.ComplexVectorTensorProduct(topQubit, botQubit);
@@ -170,6 +170,8 @@ public class Deutsch {
             prob1 += Math.pow(result2[i].getReal(),2);
         }
         double prob0=1-prob1;
+        System.out.println(prob1);
+        System.out.println(prob0);
         System.out.println("El estado 1 del TopQubit tiene una probabilidad de: "+Math.round(prob1));
         System.out.println("El estado 0 del TopQubit tiene una probabilidad de: "+Math.round(prob0));
         if (Math.round(prob1)==1){

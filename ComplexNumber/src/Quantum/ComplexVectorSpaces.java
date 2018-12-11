@@ -16,6 +16,31 @@ import java.util.List;
  * @author USER
  */
 public class ComplexVectorSpaces {
+    
+    public static ComplexNumber[] create(String estado){
+        ComplexNumber[] Qubit = new ComplexNumber[2];
+        if (estado.equals(1)){
+            Qubit[0]= new ComplexNumber(0);
+            Qubit[1]= new ComplexNumber(1);
+        }else{
+            Qubit[0]= new ComplexNumber(1);
+            Qubit[1]= new ComplexNumber(0);
+        }
+        return Qubit;
+    }  
+
+    
+    public static ComplexNumber[] createQubit(String estado){
+        ComplexNumber[] Qubit = new ComplexNumber[2];
+        if (estado.equals(1)){
+            Qubit[0]= new ComplexNumber(0);
+            Qubit[1]= new ComplexNumber(1);
+        }else{
+            Qubit[0]= new ComplexNumber(1);
+            Qubit[1]= new ComplexNumber(0);
+        }
+        return Qubit;
+    }  
 
     //Drill 2.1.1
     public static ComplexNumber[] complexVectorSum(ComplexNumber[] vect1, ComplexNumber[] vect2) {
@@ -143,7 +168,6 @@ public class ComplexVectorSpaces {
         else{
             Logger.logMsg(Logger.ERROR, "INFO: Error, Las columnas de la matriz no son iguales ");
             throw new RuntimeException("INFO: Error, Las columnas de la matriz no son iguales ");
-            
         }      
     }
     
@@ -371,7 +395,5 @@ public class ComplexVectorSpaces {
             Logger.logMsg(Logger.ERROR, "INFO: Error, La matriz no es hermitiana");
             throw new RuntimeException("INFO: Error, La matriz no es hermitiana");
         }
-
-        
     }
 }
