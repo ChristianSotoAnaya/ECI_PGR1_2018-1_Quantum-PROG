@@ -165,15 +165,13 @@ public class Deutsch {
         return uf;
     }
     public static void measure(ComplexNumber[] result2){        
-        double prob1=0;
+        double prob0=0;
         for(int i=0;i<result2.length-2;i++){
-            prob1 += Math.pow(result2[i].getReal(),2);
+            prob0+= Math.pow(result2[i].getReal(),2);
         }
-        double prob0=1-prob1;
-        System.out.println(prob1);
-        System.out.println(prob0);
-        System.out.println("El estado 1 del TopQubit tiene una probabilidad de: "+Math.round(prob1));
+        double prob1=1-prob0;
         System.out.println("El estado 0 del TopQubit tiene una probabilidad de: "+Math.round(prob0));
+        System.out.println("El estado 1 del TopQubit tiene una probabilidad de: "+Math.round(prob1));
         if (Math.round(prob1)==1){
             System.out.println("Como el TopQubit esta en estado 1, entonces la funcion es Balanceada");
         } else{

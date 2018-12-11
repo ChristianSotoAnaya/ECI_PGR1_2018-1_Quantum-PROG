@@ -66,7 +66,7 @@ public class Shor {
         //pasos del algoritmo
         ComplexNumber[] result0 = ComplexVectorSpaces.complexVectorMatrixMultiplication(tensorQubitString, tensorHadamardIdentidad);
         ComplexNumber[] result1 = ComplexVectorSpaces.complexVectorMatrixMultiplication(result0, uf);
-        ComplexNumber[] result2 = ComplexVectorSpaces.complexVectorMatrixMultiplication(result1, tensorQFT);
+        ComplexNumber[] result2 = Qft.transform(result1);
         measure(result2);
 
     }
