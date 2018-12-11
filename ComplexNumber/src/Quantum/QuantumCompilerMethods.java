@@ -65,24 +65,27 @@ public class QuantumCompilerMethods {
         ArrayList<ComplexNumber[][]> h = new ArrayList();
        
     
-        ComplexNumber[][] controlledNot = new ComplexNumber[4][4];
-        controlledNot[0][0]=new ComplexNumber(1);
-        controlledNot[0][1]=new ComplexNumber(0);
-        controlledNot[0][2]=new ComplexNumber(0);
-        controlledNot[0][3]=new ComplexNumber(0);
-        controlledNot[1][0]=new ComplexNumber(0);
-        controlledNot[1][1]=new ComplexNumber(1);
-        controlledNot[1][2]=new ComplexNumber(0);
-        controlledNot[1][3]=new ComplexNumber(0);   
-        controlledNot[2][0]=new ComplexNumber(0);
-        controlledNot[2][1]=new ComplexNumber(0);
-        controlledNot[2][2]=new ComplexNumber(0);
-        controlledNot[2][3]=new ComplexNumber(1); 
-        controlledNot[3][0]=new ComplexNumber(0);
-        controlledNot[3][1]=new ComplexNumber(0);
-        controlledNot[3][2]=new ComplexNumber(1);
-        controlledNot[3][3]=new ComplexNumber(0);
-        h.add(controlledNot);
+        ComplexNumber[][] uf = new ComplexNumber[4][4];
+        uf[0][0] = new ComplexNumber(0);
+            uf[0][1] = new ComplexNumber(1);
+            uf[0][2] = new ComplexNumber(0);
+            uf[0][3] = new ComplexNumber(0);
+            //fila 2
+            uf[1][0] = new ComplexNumber(1);
+            uf[1][1] = new ComplexNumber(0);
+            uf[1][2] = new ComplexNumber(0);
+            uf[1][3] = new ComplexNumber(0);
+            //fila 3
+            uf[2][0] = new ComplexNumber(0);
+            uf[2][1] = new ComplexNumber(0);
+            uf[2][2] = new ComplexNumber(0);
+            uf[2][3] = new ComplexNumber(1);
+            //fila 4
+            uf[3][0] = new ComplexNumber(0);
+            uf[3][1] = new ComplexNumber(0);
+            uf[3][2] = new ComplexNumber(1);
+            uf[3][3] = new ComplexNumber(0);
+        h.add(uf);
         return h;
     }
     
@@ -96,6 +99,8 @@ public class QuantumCompilerMethods {
         h.add(identidad);
         return h;
     }
+    
+    
     
     
     public static ArrayList<?> tensorProduct (ArrayList<?>  complexMatrix,ArrayList<?> qubitRegister ){
@@ -192,12 +197,11 @@ public class QuantumCompilerMethods {
     }*/
     
     public static ArrayList<ComplexNumber[]> quantumApply(ComplexNumber[][] gate, ArrayList<ComplexNumber[]> qubitRegister){       
-            ArrayList<ComplexNumber[]> qubitGate = new ArrayList();            
-            for(ComplexNumber[] q: qubitRegister){
-                qubitGate.add(ComplexVectorSpaces.complexMatrixVectorMultiplication(gate, q));
-            }  
+        ArrayList<ComplexNumber[]> qubitGate = new ArrayList();            
+        for(ComplexNumber[] q: qubitRegister){
+            qubitGate.add(ComplexVectorSpaces.complexMatrixVectorMultiplication(gate, q));
+        }  
         return qubitGate;
-        
     }
     
      public static ArrayList<ComplexNumber[][]> tensorProduct(ComplexNumber[][] qubitRegister0,ComplexNumber[][] qubitRegister){
@@ -271,15 +275,15 @@ public class QuantumCompilerMethods {
                 ComplexNumber[] temp = (ComplexNumber[]) q;
                 medicion.add(temp);
             }
-        double prob1=0;
+        double prob0=0;
         for(int i=0;i<medicion.get(0).length-2;i++){
-            prob1 += Math.pow(medicion.get(0)[i].getReal(),2);
+            prob0 += Math.pow(medicion.get(0)[i].getReal(),2);
         }
-        double prob0=1-prob1;
+        double prob1=1-prob0;
          System.out.println(prob1);
         System.out.println(prob0);
-        System.out.println("El estado 1 del TopQubit tiene una probabilidad de: "+Math.round(prob1));
         System.out.println("El estado 0 del TopQubit tiene una probabilidad de: "+Math.round(prob0));
+        System.out.println("El estado 1 del TopQubit tiene una probabilidad de: "+Math.round(prob1));
         if (Math.round(prob1)==1){
             System.out.println("Como el TopQubit esta en estado 1, entonces la funcion es Balanceada");
         } else{

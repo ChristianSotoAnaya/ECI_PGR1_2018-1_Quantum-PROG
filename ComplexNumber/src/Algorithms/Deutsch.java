@@ -29,7 +29,7 @@ public class Deutsch {
         botQubit=createBotQubit();
         hadamard = createHadamard();
         identidad = createIdentidad();
-        uf=uf(3); // [0: 0->1 ; 1->0] | [1: 0->0 ; 1->1]       |        [2: 0->1 ; 1->1] | [3: 0->0 ; 1->0] 
+        uf=uf(1); // [0: 0->1 ; 1->0] | [1: 0->0 ; 1->1]       |        [2: 0->1 ; 1->1] | [3: 0->0 ; 1->0] 
         
         // productos tensores
         tensorQubit = ComplexVectorSpaces.ComplexVectorTensorProduct(topQubit, botQubit);
